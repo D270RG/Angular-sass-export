@@ -1,5 +1,5 @@
 {
-  "name": "angular-sass-exprot",
+  "name": "angular-sass-export",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -25,15 +25,13 @@
     "zone.js": "^0.14.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^16.0.0",
-    "@angular/cli": "^16.0.0",
-    "@angular/compiler-cli": "^15.1.0",
-    "@types/node": "^20.6.4",
-    "@webpack-cli/generators": "^3.0.7",
-    "css-loader": "^6.8.1",
-    "node-sass": "^9.0.0",
-    "sass-loader": "^13.3.2",
-    "style-loader": "^3.3.3",
+    "@angular-devkit/build-angular": "16.0.0",
+    "@angular/cli": "16.0.0",
+    "@angular/compiler-cli": "15.1.0",
+    "@types/node": "20.6.4",
+    "@webpack-cli/generators": "3.0.7",
+    "css-loader": "6.8.1",
+    "style-loader": "3.3.3",
     "typescript": "~4.9.4"
   }
 }

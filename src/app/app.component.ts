@@ -7,9 +7,12 @@ import styles from '../styles_export.module.scss';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public colorVar = styles.color;
-  constructor() {}
-  ngOnInit() {
-    console.log(`Color var: ${this.colorVar}`);
+  public colorVar: string;
+  public fontVar: string;
+  public fullMap: Record<string, string>;
+  constructor() {
+    this.colorVar = styles[`status-color-primary`];
+    this.fontVar = styles['font-weight-regular'];
+    this.fullMap = styles;
   }
 }

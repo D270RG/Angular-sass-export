@@ -9,6 +9,6 @@ export default (config: Configuration, _targetOptions: TargetOptions) => {
       rules: [{ use: ['style-loader', 'css-loader'] }],
     });
   }
-  console.log(config.module?.rules);
+  console.log(JSON.stringify(config.module?.rules));
   return config;
 };

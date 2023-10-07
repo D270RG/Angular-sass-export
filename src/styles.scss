@@ -1,1 +1,13 @@
-$colorVar: blue;
+$status-colors: (
+  primary: #000,
+  success: #27ba6c,
+  info: #03a9f4,
+  warning: #ff8833,
+  danger: #ff1a1a,
+);
+
+$font-weights: (
+  regular: 400,
+  medium: 500,
+  bold: 700,
+);

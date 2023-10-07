@@ -1,5 +1,10 @@
 @import "./styles.scss";
 
 :export {
-  color: $colorVar;
+  @each $key, $value in $status-colors {
+    #{'status-color-'+$key}: $value;
+  }
+  @each $key, $value in $font-weights {
+    #{'font-weight-'+$key}: $value;
+  }
 }
