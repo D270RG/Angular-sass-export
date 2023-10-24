@@ -1,7 +1,11 @@
 <div>
   <div>Full Map:</div>
-  <pre>{{ fullMap | json }}</pre>
+  <pre id="full-map">{{ fullMap | json }}</pre>
   <br />
-  <div>Primary color: {{ colorVar }}</div>
-  <div>Regular font: {{ fontVar }}</div>
+  <div>
+    Primary color: <span id="color-var">{{ colorVar }}</span>
+  </div>
+  <div>
+    Regular font: <span id="font-var">{{ fontVar }}</span>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-@import "./styles.scss";
+@import "../styles.scss";
 
 :export {
   @each $key, $value in $status-colors {

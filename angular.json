@@ -3,13 +3,8 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-sass-exprot": {
+    "angular-sass-export": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -18,21 +13,26 @@
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "customWebpackConfig": {
-              "path": "./webpack.config.ts"
+              "path": "./webpack.config.js"
             },
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "tsconfig.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "buildOptimizer": true,
+              "optimization": true,
+              "vendorChunk": false,
+              "extractLicenses": true,
+              "sourceMap": false,
+              "namedChunks": true
             },
             "development": {
               "buildOptimizer": false,
@@ -49,23 +49,20 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-sass-exprot:build:production"
+              "browserTarget": "angular-sass-export:build:production"
             },
             "development": {
-              "browserTarget": "angular-sass-exprot:build:development"
+              "browserTarget": "angular-sass-export:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
-        "extract-i18n": {
-          "builder": "@angular-builders/custom-webpack:extract-i18n",
-          "options": {
-            "browserTarget": "angular-sass-exprot:build"
-          }
-        },
         "test": {
           "builder": "@angular-builders/custom-webpack:karma",
           "options": {
+            "customWebpackConfig": {
+              "path": "./webpack.config.js"
+            },
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
@@ -76,5 +73,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
