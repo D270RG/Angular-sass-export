@@ -25,7 +25,11 @@
     "module": "es2020",
     "useDefineForClassFields": false,
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2018", "dom", "es2019"]
+    "lib": ["es2018", "dom", "es2019"],
+    "paths": {
+      "example-lib": ["exampleLib/dist"],
+      "example-lib/*": ["exampleLib/dist/*"]
+    }
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,

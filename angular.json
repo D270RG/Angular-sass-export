@@ -72,6 +72,27 @@
           }
         }
       }
+    },
+    "exampleLib": {
+      "projectType": "library",
+      "root": "",
+      "sourceRoot": "src/exampleLib",
+      "prefix": "el",
+      "architect": {
+        "test": {
+          "builder": "@angular-builders/custom-webpack:karma",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./webpack.config.js"
+            },
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "styles": ["src/styles.scss"],
+            "scripts": []
+          }
+        }
+      }
     }
   },
   "cli": {
