@@ -1,12 +1,15 @@
 {
-  "name": "angular-sass-exprot",
+  "name": "angular-sass-export",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:lib": "ng-packagr -p src/exampleLib/ng-package.json",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "yarn run ng test --watch=false --browsers ChromeHeadless",
+    "test:lib": "yarn run ng test exampleLib --watch=false --browsers ChromeHeadless",
+    "test:short-report": "env SHORT_REPORT=true yarn run test"
   },
   "private": true,
   "dependencies": {
@@ -20,20 +23,47 @@
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/router": "^15.1.0",
     "rxjs": "~7.8.0",
-    "webpack": "^5.88.2",
     "yarn": "^1.22.19",
     "zone.js": "^0.14.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^16.0.0",
-    "@angular/cli": "^16.0.0",
-    "@angular/compiler-cli": "^15.1.0",
-    "@types/node": "^20.6.4",
-    "@webpack-cli/generators": "^3.0.7",
-    "css-loader": "^6.8.1",
-    "node-sass": "^9.0.0",
-    "sass-loader": "^13.3.2",
-    "style-loader": "^3.3.3",
-    "typescript": "~4.9.4"
+    "@angular-devkit/build-angular": "16.0.0",
+    "@angular/cli": "16.0.0",
+    "@angular/compiler-cli": "15.1.0",
+    "@types/jasmine": "5.1.1",
+    "@types/jest": "^29.5.6",
+    "@types/karma": "^6.3.6",
+    "@types/node": "^20.8.8",
+    "@webpack-cli/generators": "3.0.7",
+    "css-loader": "6.8.1",
+    "istanbul": "0.4.5",
+    "jasmine-core": "5.1.1",
+    "jasmine-spec-reporter": "7.0.0",
+    "karma": "6.4.2",
+    "karma-chrome-launcher": "3.2.0",
+    "karma-cli": "2.0.0",
+    "karma-coverage": "2.2.1",
+    "karma-firefox-launcher": "2.1.2",
+    "karma-jasmine": "5.1.0",
+    "karma-jasmine-html-reporter": "2.1.0",
+    "karma-junit-reporter": "2.0.1",
+    "karma-parallel": "0.3.1",
+    "karma-spec-reporter": "0.0.36",
+    "ng-packagr": "^16.2.3",
+    "puppeteer": "21.4.1",
+    "style-loader": "3.3.3",
+    "typescript": "~4.9.4",
+    "webpack": "5.89.0"
+  },
+  "resolutions": {
+    "webpack": "5.89.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "wallaby": {
+    "autoDetect": true
   }
 }

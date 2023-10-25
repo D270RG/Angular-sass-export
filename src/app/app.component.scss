@@ -1,5 +1,5 @@
 @import "../styles.scss";
 
 .colored {
-  color: $colorVar;
+  color: map-get($status-colors, success);
 }

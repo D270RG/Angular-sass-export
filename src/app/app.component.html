@@ -1,1 +1,12 @@
-<div class="colored">{{ colorVar }}</div>
+<div>
+  <div>Full Map:</div>
+  <pre id="full-map">{{ fullMap | json }}</pre>
+  <br />
+  <div>
+    Primary color: <span id="color-var">{{ colorVar }}</span>
+  </div>
+  <div>
+    Regular font: <span id="font-var">{{ fontVar }}</span>
+  </div>
+  <lib-example-component></lib-example-component>
+</div>

@@ -1,0 +1,10 @@
+@import "../styles.scss";
+
+:export {
+  @each $key, $value in $status-colors {
+    #{'status-color-'+$key}: $value;
+  }
+  @each $key, $value in $font-weights {
+    #{'font-weight-'+$key}: $value;
+  }
+}

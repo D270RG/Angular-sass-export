@@ -1,27 +1,61 @@
-# AngularSassExprot
+# AngularSassExport
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
+This is example project to demonstrate variables export from SCSS to JS in Angular.
 
-## Development server
+Unlike React, Angular has its own chain of webpack loaders and doesn't give convenient option to configure it.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# Possible errors
 
-## Code scaffolding
+1. Main webpack rule looks like this:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```js
+config.module.rules.unshift({
+  test: /\_export.module.scss$/,
+  exclude: /\_export.module.scss.d.ts$/,
+  rules: [{ use: ["style-loader", "css-loader"] }],
+});
+```
 
-## Build
+Rule applied after sass-loader but before Angular css-loader. If _push_ is being used instead of _unshift_, Angular css-loader will be applied first, leading to it being applied twice:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```js
+./src/styles_export.module.scss - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+expected "{".
+  ╷
+2 │       import API from "!../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js";
+  │                                                                                               ^
+  ╵
+  src\styles_export.module.scss 2:95  root stylesheet
+```
 
-## Running unit tests
+2. Following syntax gives an error:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```scss
+:export {
+  statusColors: #{$status-colors};
+  fontWeights: #{$font-weights};
+}
+```
 
-## Running end-to-end tests
+```js
+./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[7].rules[1].use[0]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[7].rules[1].use[1]!./src/styles_export.module.scss - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+(primary: #000, success: #27ba6c, info: #03a9f4, warning: #ff8833, danger: #ff1a1a) isn't a valid CSS value.
+   ╷
+13 │   statusColors: #{$status-colors};
+   │                   ^^^^^^^^^^^^^^
+   ╵
+  src\styles_export.module.scss 13:19  root stylesheet
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+This happens because SCSS can't export multiple maps, as it is being parsed to CSS. It is possible, hovewer, to export multiple maps as one keyvalue:
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```scss
+:export {
+  @each $key, $value in $status-colors {
+    #{'status-color-'+$key}: $value;
+  }
+  @each $key, $value in $font-weights {
+    #{'font-weight-'+$key}: $value;
+  }
+}
+```
