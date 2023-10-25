@@ -6,6 +6,29 @@ Unlike React, Angular has its own chain of webpack loaders and doesn't give conv
 
 # Possible errors
 
+1. Currently test running with Wallaby.js not working if lib project is present in angular.json with "test" entry and "@angular-builders/custom-webpack:karma" builder. Error looks like no custom webpack rule being applied:
+
+```js
+‌[Error] Module parse failed: Unexpected token (1:0) 
+[Error] File was processed with these loaders: 
+[Error]  * wallaby-post-loader 
+[Error]  * ./node_modules/resolve-url-loader/index.js 
+[Error]  * ./node_modules/sass-loader/dist/cjs.js 
+[Error]  * wallaby-pre-loader 
+[Error] You may need an additional loader to handle the result of these loaders. 
+[Error] > :export { 
+[Error] |   status-color-primary: #000; 
+[Error] |   status-color-success: #27ba6c; 
+[Error] @ ./src/styles-export/_styles_export.module.scss, 
+[Error] @ ./src/app/app.component.ts, 
+[Error] @ ./src/app/app.component.spec.ts 
+```
+
+Default test runs with "ng test" still works.
+
+
+# Syntax explanation
+
 1. Main webpack rule looks like this:
 
 ```js
@@ -28,26 +51,7 @@ expected "{".
   src\styles_export.module.scss 2:95  root stylesheet
 ```
 
-2. Following syntax gives an error:
-
-```scss
-:export {
-  statusColors: #{$status-colors};
-  fontWeights: #{$font-weights};
-}
-```
-
-```js
-./node_modules/css-loader/dist/cjs.js!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[7].rules[1].use[0]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[7].rules[1].use[1]!./src/styles_export.module.scss - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
-(primary: #000, success: #27ba6c, info: #03a9f4, warning: #ff8833, danger: #ff1a1a) isn't a valid CSS value.
-   ╷
-13 │   statusColors: #{$status-colors};
-   │                   ^^^^^^^^^^^^^^
-   ╵
-  src\styles_export.module.scss 13:19  root stylesheet
-```
-
-This happens because SCSS can't export multiple maps, as it is being parsed to CSS. It is possible, hovewer, to export multiple maps as one keyvalue:
+2. SCSS can't export multiple maps, as it is being parsed to CSS. It is possible, hovewer, to export multiple maps as one keyvalue:
 
 ```scss
 :export {
