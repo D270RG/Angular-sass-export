@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ExampleLibModule } from 'exampleLib/exampleLib.module';
 import { AppComponent } from './app.component';
+import { ExampleLibComponent } from 'example-lib';
 
 describe('app component', () => {
   let fixture: ComponentFixture<AppComponent>;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ExampleLibModule],
+      imports: [ExampleLibComponent],
       declarations: [AppComponent],
     }).compileComponents();
     fixture = TestBed.createComponent(AppComponent);

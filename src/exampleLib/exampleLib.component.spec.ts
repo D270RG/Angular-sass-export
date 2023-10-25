@@ -5,7 +5,7 @@ describe('example lib component', () => {
   let fixture: ComponentFixture<ExampleLibComponent>;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExampleLibComponent],
+      imports: [ExampleLibComponent],
     }).compileComponents();
     fixture = TestBed.createComponent(ExampleLibComponent);
     fixture.detectChanges();
